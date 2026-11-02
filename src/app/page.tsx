@@ -1,69 +1,36 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { getPortfolio } from "@/lib/data";
+import DashIntro from "@/components/DashIntro";
+import Statement from "@/components/Statement";
+import PhotoRoll from "@/components/PhotoRoll";
+import Work from "@/components/Work";
+import Reveal from "@/components/Reveal";
+import Lightbox from "@/components/Lightbox";
+import Nav from "@/components/Nav";
+import Journey from "@/components/Journey";
+import { Certificates, Contact, Tools } from "@/components/Sections";
 
-export default function Home() {
+export default async function Home() {
+  const { profile, rollPhotos, projects, dataProjects, jobs, certificates, tools } = await getPortfolio();
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+      <Nav profile={profile} />
+      <DashIntro profile={profile} />
+      <Statement text={profile.statement} highlights={profile.statementHighlights} />
+      <PhotoRoll photos={rollPhotos} />
+      <Work projects={projects} id="work" label="Selected work · Figma" />
+      <Work
+        projects={dataProjects}
+        id="data-work"
+        label="Data work · Power BI"
+        note="Built on internal AHM data, so the Power BI files aren't public and can't be linked."
+      />
+      <Journey jobs={jobs} />
+      <Certificates certificates={certificates} />
+      <Tools tools={tools} />
+      <Contact profile={profile} />
+      <Lightbox />
+      <Reveal />
+    </>
   );
 }

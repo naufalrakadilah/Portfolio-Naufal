@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# foto cadangan resolusi penuh (termasuk dashboard AHM yang belum di-blur), jangan di-upload
+/img-original/
