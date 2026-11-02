@@ -329,7 +329,12 @@ footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wr
   .chapter-meta h3 { font-size: 24px; }
   .film { --fh: min(42svh, 360px); --hole: 26px; gap: 14px; }
   .zoom-head { top: 10svh; }
-  .side-grid { display: none; }
+  /* HP: satu kolom foto kecil di tiap sisi foto tengah */
+  .side-grid { width: 20vw; grid-template-columns: 1fr; gap: 2.5vw; top: 58%; }
+  .side-grid.l { left: 2vw; }
+  .side-grid.r { right: 2vw; top: 62%; }
+  .side-grid .side:nth-child(even) { transform: none; }
+  .side { border-radius: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
